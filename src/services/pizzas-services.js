@@ -27,7 +27,7 @@ export default class PizzaService{
         //me conecto con la base
         let pool= await sql.connect(config);
         //hago un request
-        let result = await pool.result()
+        let result = await pool.request()
         //por parametros (input)
                             .input('pId', sql.Int, id)
                             .query('SELECT * FROM Pizzas WHERE id=@pId')
@@ -39,45 +39,44 @@ export default class PizzaService{
    return returnEntity;
     }
 
-    insert=async(id, nombre,libreGluten, importe, descripcion)=>{
+    insert = async (nombre,libreGluten, importe, descripcion) => {
         let returnEntity=null;
-        console.log('Estoy en: PizzaSErvice.insert');
+        console.log('Estoy en: PizzaService.insert');
         try{
             let pool= await sql.connect(config);
-            let result = await pool.result()
-                                .input('pId', sql.Int, id)
-                                .imput('pNombre',sql.VarChar, nombre)
-                                .imput('pLibreGluten',sql.Bit, libreGluten)
+            let result = await pool.request()
+                                .input('pNombre',sql.VarChar, nombre)
+                                .input('pLibreGluten',sql.Bit, libreGluten)
                                 .input('pImporte', sql.Float,importe)
                                 .input('pDescripcion', sql.VarChar,descripcion)
-                                .query("INSERT INTO Pizzas WHERE Nombre=@pNombre,LibreGluten=@pLibreGluten,Importe=@pImporte,Descripcion=@pDescripcion WHERE id=@pId");
-            resultado=result.rowsAffected;
+                                .query("INSERT INTO Pizzas(Nombre,LibreGluten,Importe,Descripcion) VALUES (@pNombre,@pLibreGluten,@pImporte,@pDescripcion)");
+            returnEntity=result.rowsAffected;
         } 
         catch(error) {
             console.log(error);
         }
-       return resultado;
+        return returnEntity;
         }
 
 
         update=async(id, nombre,libreGluten, importe, descripcion)=>{
             let returnEntity=null;
-            console.log('Estoy en: PizzaSErvice.update');
+            console.log('Estoy en: PizzaService.update');
             try{
                 let pool= await sql.connect(config);
-                let result = await pool.result()
+                let result = await pool.request()
                                     .input('pId', sql.Int, id)
-                                    .imput('pNombre',sql.VarChar, nombre)
-                                    .imput('pLibreGluten',sql.Bit, libreGluten)
+                                    .input('pNombre',sql.VarChar, nombre)
+                                    .input('pLibreGluten',sql.Bit, libreGluten)
                                     .input('pImporte', sql.Float,importe)
                                     .input('pDescripcion', sql.VarChar,descripcion)
                                     .query("UPDATE Pizzas SET Nombre=@pNombre,LibreGluten=@pLibreGluten,Importe=@pImporte,Descripcion=@pDescripcion WHERE id=@pId");
-                resultado=result.rowsAffected;
+                                    returnEntity=result.rowsAffected;
             } 
             catch(error) {
                 console.log(error);
             }
-           return resultado;
+           return returnEntity;
             }
 
     deleteById=async(id)=>{
