@@ -1,0 +1,16 @@
+{
+  "name": "pruebapizzas2ok",
+  "version": "1.0.0",
+  "description": "prueba",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "maia y shirly",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "mssql": "^9.1.1"
+  }
+}
