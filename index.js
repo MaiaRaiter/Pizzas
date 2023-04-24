@@ -3,5 +3,5 @@ import config from './dbconfig.js';
 
 
 let svc=new PizzaService()
-let result= await svc.deleteById(1)
+let result= await svc.getAll(1,'id',null)
 console.log(result);

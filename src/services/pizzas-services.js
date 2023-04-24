@@ -3,7 +3,7 @@ import sql from 'mssql';
 
 
 export default class PizzaService{
-    getAll = async() => {
+    getAll = async(top, orderField, sortOrder) => {
         let returnEntity = null;
         console.log('Estoy en: PizzaSErvice.GetAll');
         try{
