@@ -3,7 +3,7 @@ import sql from 'mssql';
 
 
 export default class PizzaService{
-    getAll = async(top, orderField, sortOrder) => {
+    getAll = async() => {
         let returnEntity = null;
         console.log('Estoy en: PizzaSErvice.GetAll');
         try{
@@ -93,4 +93,5 @@ export default class PizzaService{
     }
     return rowsAffected;
     }
+
 }
