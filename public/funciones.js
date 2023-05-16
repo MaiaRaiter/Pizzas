@@ -10,7 +10,7 @@
         var index= 0;
   
         pizza.map((pizza, index) => {
-          const {Nombre , Importe} = pizza;
+          const {Nombre , Importe, Descripcion} = pizza;
   
           document.querySelector("#listado").innerHTML += `
           <div class="col-4 pt-5">
@@ -18,7 +18,8 @@
           <div class="card-body">
           <div class="alert alert-success" role="alert">
           <center><h5 class="card-title nombre">${Nombre}</h5></center>
-          <center><p >$${Importe}</p></center>
+          <center><p >$${Importe}</p></center><br>
+          <center><p >${Descripcion}</p></center>
           <p class="card-text"></p>
           </div>
           </div>
