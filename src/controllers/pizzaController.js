@@ -1,13 +1,13 @@
 // van los router que direccionn los endpoints haciendolo clases separadas
 import { Router} from 'express';
-import PizzaService from '../services/pizzas-services.js';
+import PizzaService from '../services/PizzaService.js';
 
 //import { ReasonPhrases, StatusCodes} from 'http-status-codes';
 
 const router = Router();
 const pizzaService = new PizzaService();
 
-router.get('', async (req, res) => {
+router.get('/', async (req, res) => {
   console.log('Estoy en: pizzaController get /');
   
   const pizzas = await pizzaService.getAll();

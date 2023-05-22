@@ -3,7 +3,7 @@
   function CargarPizzas() {
     console.log("Estoy en CargarPizzas");
     axios
-      .get("http://localhost:3000/getall/")
+      .get("http://localhost:3000/getAll/")
       // localhost:5000/pizzas/44
       .then((result) => {
         const pizza = result.data;
