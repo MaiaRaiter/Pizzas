@@ -1,4 +1,4 @@
-USE [Pizzas]
+USE [DAI-Pizzas]
 GO
 /****** Object:  Table [dbo].[Pizzas]    Script Date: 3/13/2022 3:24:39 PM ******/
 SET ANSI_NULLS ON

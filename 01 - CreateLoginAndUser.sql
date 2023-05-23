@@ -1,4 +1,4 @@
-USE [Pizzas]
+USE [DAI-Pizzas]
 GO
 --
 -- Primero hay que creal la base de datos 'DAI-Pizzas'

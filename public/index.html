@@ -11,10 +11,15 @@
   </head>
   <body>
     <center><button type="button" class="btn btn-success boton" onclick="CargarPizzas()">Cargar Pizzas</button> </center>
-
+    <div class="form-outline">
+      <input type="number" id="txtId" class="form-control" />
+      <label class="form-label" for="typeNumber">Ingrese Id</label>
+      <center><button type="button" class="btn btn-success boton" onclick="getById()"> Buscar por Id</button> </center>
+  </div>
     <div class="container m-auto">
     <div id="listado" class="row"></div>
   </div>
+  
     <div id="resultado"></div>
     <script src="funciones.js"></script>
   </body>
