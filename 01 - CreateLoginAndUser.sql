@@ -9,13 +9,13 @@ BEGIN
 	PRINT 'Creando Login'
 	CREATE LOGIN [Pizzas] WITH 
 		PASSWORD=N'VivaLaMuzza123', 
-		DEFAULT_DATABASE=[Pizzas], 
+		DEFAULT_DATABASE=[DAI-Pizzas], 
 		CHECK_EXPIRATION=OFF, 
 		CHECK_POLICY=OFF
 END
 GO
 
-USE [Pizzas]
+USE [DAI-Pizzas]
 IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE [Pizzas] = N'Pizzas')
 BEGIN
 	PRINT 'Creando User'

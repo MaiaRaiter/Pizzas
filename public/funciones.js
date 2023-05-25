@@ -70,3 +70,42 @@ const BASE_URL_PIZZAS = 'http://localhost:3000/api/pizzas/';
     table += "</table>";
     document.getElementById("listado").innerHTML = table;
   }
+
+  function insert(){
+    let nombre = document.getElementById('InputNombre').value;
+    let libreGluten = document.getElementById('CheckInputLibredeGluten').value;
+    let importe = document.getElementById('InputImporte').value;
+    let descripcion = document.getElementById('InputDescripcion').value;
+
+    console.log('insert: ', nombre, libreGluten, importe, descripcion);
+    axios
+      .get("http://localhost:3000/api/pizzas/" + nombre + libreGluten + importe + descripcion)
+      .then((result) => {
+        
+        const pizza = result.data;
+  
+        pizza.map((pizza) => {
+          const {Nombre , LibreGluten, Importe, Descripcion} = pizza;
+  
+          document.querySelector("#listado").innerHTML += `
+          <div class="col-4 pt-5">
+          <div class="card" style="width:18rem;">
+          <div class="card-body">
+          <div class="alert alert-success" role="alert">
+          <center><h5 class="card-title nombre">${Nombre}</h5></center>
+          <center><p >$${Importe}</p></center><br>
+          <center><p >${Descripcion}</p></center>
+          <center><p >${LibreGluten}</p></center>
+          <p class="card-text"></p>
+          </div>
+          </div>
+          </div>
+          </div>
+         `;
+        });
+      })
+      .catch(error => {
+        displayUnaPizza({}, true);
+      });
+  }
+
