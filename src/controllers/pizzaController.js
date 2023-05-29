@@ -34,18 +34,21 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('', async (req, res) => {
-  console.log('Estoy en: pizzaController post /', req.body);
+  let cuerpo = req.body;
+  console.log('Estoy en: pizzaController post /', cuerpo);
 
-  const pizza = await pizzaService.insert(req.body);
+  const pizza = await pizzaService.insert(cuerpo);
 
   return res.status(201).json(pizza);
 });
 
 router.put('/:id', async (req, res) => {
+  let cuerpo = req.body;
+
   console.log(`Request URL Param: ${req.params.id}`);
   console.log('Estoy en: pizzaController put /:id');
 
-  const pizza = await pizzaService.update(req.body);
+  const pizza = await pizzaService.update(cuerpo);
 
   return res.status(200).json(pizza);
 });

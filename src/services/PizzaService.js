@@ -39,16 +39,16 @@ export default class PizzaService{
    return returnEntity;
     }
 
-    insert = async (nombre,libreGluten, importe, descripcion) => {
+    insert = async (cuerpo) => {
         let returnEntity=null;
         console.log('Estoy en: PizzaService.insert');
         try{
             let pool= await sql.connect(config);
             let result = await pool.request()
-                                .input('pNombre',sql.VarChar, nombre)
-                                .input('pLibreGluten',sql.Bit, libreGluten)
-                                .input('pImporte', sql.Float,importe)
-                                .input('pDescripcion', sql.VarChar,descripcion)
+                                .input('pNombre',sql.VarChar, cuerpo.Nombre)
+                                .input('pLibreGluten',sql.Bit, cuerpo.LibreGluten)
+                                .input('pImporte', sql.Float,cuerpo.Importe)
+                                .input('pDescripcion', sql.VarChar,cuerpo.Descripcion)
                                 .query("INSERT INTO Pizzas(Nombre,LibreGluten,Importe,Descripcion) VALUES (@pNombre,@pLibreGluten,@pImporte,@pDescripcion)");
             returnEntity=result.rowsAffected;
         } 
@@ -59,17 +59,17 @@ export default class PizzaService{
         }
 
 
-        update=async(id, nombre,libreGluten, importe, descripcion)=>{
+        update=async(cuerpo)=>{
             let returnEntity=null;
             console.log('Estoy en: PizzaService.update');
             try{
                 let pool= await sql.connect(config);
                 let result = await pool.request()
-                                    .input('pId', sql.Int, id)
-                                    .input('pNombre',sql.VarChar, nombre)
-                                    .input('pLibreGluten',sql.Bit, libreGluten)
-                                    .input('pImporte', sql.Float,importe)
-                                    .input('pDescripcion', sql.VarChar,descripcion)
+                                    .input('pId', sql.Int, cuerpo.Id)
+                                    .input('pNombre',sql.VarChar, cuerpo.Nombre)
+                                    .input('pLibreGluten',sql.Bit, cuerpo.LibreGluten)
+                                    .input('pImporte', sql.Float,cuerpo.Importe)
+                                    .input('pDescripcion', sql.VarChar,cuerpo.Descripcion)
                                     .query("UPDATE Pizzas SET Nombre=@pNombre,LibreGluten=@pLibreGluten,Importe=@pImporte,Descripcion=@pDescripcion WHERE id=@pId");
                                     returnEntity=result.rowsAffected;
             } 

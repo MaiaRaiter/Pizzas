@@ -4,7 +4,7 @@ GO
 -- Primero hay que creal la base de datos 'DAI-Pizzas'
 --
 
-IF NOT EXISTS (SELECT * FROM sys.server_principals WHERE [Pizzas] = N'Pizzas')
+IF NOT EXISTS (SELECT * FROM sys.server_principals WHERE [name] = N'Pizzas')
 BEGIN
 	PRINT 'Creando Login'
 	CREATE LOGIN [Pizzas] WITH 
@@ -16,7 +16,7 @@ END
 GO
 
 USE [DAI-Pizzas]
-IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE [Pizzas] = N'Pizzas')
+IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE [name] = N'Pizzas')
 BEGIN
 	PRINT 'Creando User'
 	CREATE USER [Pizzas] FOR LOGIN [Pizzas]

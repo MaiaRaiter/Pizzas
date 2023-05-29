@@ -67,45 +67,97 @@ const BASE_URL_PIZZAS = 'http://localhost:3000/api/pizzas/';
       table += `<td scope="col" class="text-center">${unaPizza.Importe}</td>`;
       table += `<td scope="col" class="text-center">${unaPizza.LibreGluten}</td>`;
       table += `</tr>`;
-    table += "</table>";
+      table += "</table>";
     document.getElementById("listado").innerHTML = table;
   }
 
-  function insert(){
-    let nombre = document.getElementById('InputNombre').value;
-    let libreGluten = document.getElementById('CheckInputLibredeGluten').value;
-    let importe = document.getElementById('InputImporte').value;
-    let descripcion = document.getElementById('InputDescripcion').value;
+  function Insert(){
+  
+    let url = "http://localhost:3000/api/pizzas/"
 
-    console.log('insert: ', nombre, libreGluten, importe, descripcion);
+    const parametros = {
+      Nombre: document.getElementById('InputNombre').value,
+      LibreGluten: document.getElementById('CheckInputLibredeGluten').checked,
+      Importe: document.getElementById('InputImporte').value,
+      Descripcion: document.getElementById('InputDescripcion').value
+    }
+
+    console.log(parametros);
+    /*
+      document.getElementById('InputNombre').value='';
+      document.getElementById('CheckInputLibredeGluten').value='';
+      document.getElementById('InputImporte').value='';
+      document.getElementById('InputDescripcion').value='';
+    */
     axios
-      .get("http://localhost:3000/api/pizzas/" + nombre + libreGluten + importe + descripcion)
-      .then((result) => {
-        
-        const pizza = result.data;
-  
-        pizza.map((pizza) => {
-          const {Nombre , LibreGluten, Importe, Descripcion} = pizza;
-  
-          document.querySelector("#listado").innerHTML += `
-          <div class="col-4 pt-5">
-          <div class="card" style="width:18rem;">
-          <div class="card-body">
-          <div class="alert alert-success" role="alert">
-          <center><h5 class="card-title nombre">${Nombre}</h5></center>
-          <center><p >$${Importe}</p></center><br>
-          <center><p >${Descripcion}</p></center>
-          <center><p >${LibreGluten}</p></center>
-          <p class="card-text"></p>
-          </div>
-          </div>
-          </div>
-          </div>
-         `;
-        });
+      .post (url, parametros)
+      .then(() => {
+
+        document.querySelector("#listado").innerHTML += ""
+        document.querySelector("#listado").innerHTML += `<p> La pizza ha sido creada</p>`
+      
       })
       .catch(error => {
-        displayUnaPizza({}, true);
+        console.log(error);
       });
+      return false;
   }
+
+  function Update(){
+  
+    let url = "http://localhost:3000/api/pizzas/"
+
+    const parametros = {
+
+      Id: document.getElementById('upadteId').value,
+      Nombre: document.getElementById('upadteNombre').value,
+      LibreGluten: document.getElementById('upadteLibredeGluten').value,
+      Importe: document.getElementById('upadteImporte').value,
+      Descripcion: document.getElementById('upadteDescripcion').value
+    }
+
+    console.log(parametros);
+
+      document.getElementById('upadteId').value = '';
+      document.getElementById('upadteNombre').value='';
+      document.getElementById('upadteLibredeGluten').value='';
+      document.getElementById('upadteImporte').value='';
+      document.getElementById('upadteDescripcion').value='';
+    
+    axios
+      .put (url, parametros)
+      .then(() => {
+
+        document.querySelector("#listado").innerHTML += ""
+        document.querySelector("#listado").innerHTML += `<p> La pizza ha sido actualizada</p>`
+      
+      })
+      .catch(error => {
+        console.log(error);
+      });
+      return false;
+  }
+
+  function Delete(){
+  
+    let url = "http://localhost:3000/api/pizzas/" + deleteId.value
+
+    document.getElementById('deleteId').value = '';
+
+    axios
+      .dleete (url)
+      .then(() => {
+
+        document.querySelector("#listado").innerHTML += ""
+        document.querySelector("#listado").innerHTML += `<p> La pizza ha sido eliminada</p>`
+      
+      })
+      .catch(error => {
+        console.log(error);
+        document.querySelector("#listado").innerHTML += ""
+        document.querySelector("#listado").innerHTML += `<p> La pizza no existe</p>`
+      });
+      return false;
+  }
+
 
