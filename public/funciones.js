@@ -139,13 +139,15 @@ const BASE_URL_PIZZAS = 'http://localhost:3000/api/pizzas/';
   }
 
   function Delete(){
-  
-    let url = "http://localhost:3000/api/pizzas/" + deleteId.value
 
-    document.getElementById('deleteId').value = '';
+   let borrar =  document.getElementById('deleteId');
+  
+    let url = "http://localhost:3000/api/pizzas/" + borrar.value
+
+   
 
     axios
-      .dleete (url)
+      .delete (url)
       .then(() => {
 
         document.querySelector("#listado").innerHTML += ""

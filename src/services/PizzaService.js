@@ -56,10 +56,10 @@ export default class PizzaService{
             console.log(error);
         }
         return returnEntity;
-        }
+    }
 
 
-        update=async(cuerpo)=>{
+    update=async(cuerpo)=>{
             let returnEntity=null;
             console.log('Estoy en: PizzaService.update');
             try{
@@ -70,7 +70,7 @@ export default class PizzaService{
                                     .input('pLibreGluten',sql.Bit, cuerpo.LibreGluten)
                                     .input('pImporte', sql.Float,cuerpo.Importe)
                                     .input('pDescripcion', sql.VarChar,cuerpo.Descripcion)
-                                    .query("UPDATE Pizzas SET Nombre=@pNombre,LibreGluten=@pLibreGluten,Importe=@pImporte,Descripcion=@pDescripcion WHERE id=@pId");
+                                    .query("UPDATE Pizzas SET Nombre=@pNombre,LibreGluten=@pLibreGluten,Importe=@pImporte,Descripcion=@pDescripcion WHERE Id=@pId");
                                     returnEntity=result.rowsAffected;
             } 
             catch(error) {
@@ -86,7 +86,7 @@ export default class PizzaService{
         let pool = await sql.connect(config)
         let result= await pool.request()
                           .input('pId', sql.Int , id)
-                          .query('DELETE FROM Pizzas WHERE id=@pId');
+                          .query('DELETE FROM Pizzas WHERE Id=@pId');
       rowsAffected=result.rowsAffected;                    
     } catch (error) {
         console.log(error)

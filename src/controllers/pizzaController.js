@@ -4,10 +4,10 @@ import PizzaService from '../services/PizzaService.js';
 
 //import { ReasonPhrases, StatusCodes} from 'http-status-codes';
 
-const router = Router();
+const PizzaRouter = Router();
 const pizzaService = new PizzaService();
 
-router.get('/', async (req, res) => {
+PizzaRouter.get('/', async (req, res) => {
   console.log('Estoy en: pizzaController get /');
   
   const pizzas = await pizzaService.getAll();
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
   return res.status(200).json(pizzas);
 });
 
-router.get('/:id', async (req, res) => {
+PizzaRouter.get('/:id', async (req, res) => {
   console.log('Estoy en: pizzaController get /:id', req.params.id);
   let respuesta;
   
@@ -33,7 +33,7 @@ router.get('/:id', async (req, res) => {
   return respuesta;
 });
 
-router.post('', async (req, res) => {
+PizzaRouter.post('', async (req, res) => {
   let cuerpo = req.body;
   console.log('Estoy en: pizzaController post /', cuerpo);
 
@@ -42,10 +42,10 @@ router.post('', async (req, res) => {
   return res.status(201).json(pizza);
 });
 
-router.put('/:id', async (req, res) => {
+PizzaRouter.put('', async (req, res) => {
   let cuerpo = req.body;
 
-  console.log(`Request URL Param: ${req.params.id}`);
+ 
   console.log('Estoy en: pizzaController put /:id');
 
   const pizza = await pizzaService.update(cuerpo);
@@ -53,7 +53,7 @@ router.put('/:id', async (req, res) => {
   return res.status(200).json(pizza);
 });
 
-router.delete('/:id', async (req, res) => {
+PizzaRouter.delete('/:id', async (req, res) => {
   console.log('Estoy en: pizzaController delete /:id', req.params.id);
 
   const pizza = await pizzaService.deleteById(req.params.id);
@@ -61,4 +61,4 @@ router.delete('/:id', async (req, res) => {
   return res.status(200).json(pizza);
 });
 
-export default router;
+export default PizzaRouter;
