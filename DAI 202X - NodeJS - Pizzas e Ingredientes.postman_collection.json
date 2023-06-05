@@ -1,0 +1,439 @@
+{
+	"info": {
+		"_postman_id": "8879149f-0839-4cf3-8ad1-0db71ddd8b5f",
+		"name": "DAI 202X - NodeJS - Pizzas e Ingredientes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Pizzas",
+			"item": [
+				{
+					"name": "Pizzas - GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/pizzas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"pizzas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pizzas - GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/pizzas/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"pizzas",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pizzas - Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "64e3acf0-6113-4d5d-85e8-c6d8c12ddbdc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Nombre\" : \"Pizzaiola\",\r\n    \"LibreGluten\": false,\r\n    \"Importe\": 2050.50,\r\n    \"Descripcion\": \"pizza con queso y rodajas de tomate y ajo.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/pizzas/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"pizzas",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pizzas - Update",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "64e3acf0-6113-4d5d-85e8-c6d8c12ddbdc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Id\": 5,\r\n    \"Nombre\": \"Napolitana\",\r\n    \"LibreGluten\": false,\r\n    \"Importe\": 1850.50,\r\n    \"Descripcion\": \"Salsa de tomate, queso mozzarella, anchoas, orégano, alcaparras y aceite de oliva. Un corcho para cuando vas al excusado..\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/pizzas/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"pizzas",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pizzas - DeleteById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "64e3acf0-6113-4d5d-85e8-c6d8c12ddbdc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/pizzas/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"pizzas",
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ingredientes",
+			"item": [
+				{
+					"name": "Ingredientes - GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/ingredientes/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"ingredientes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ingredientes - GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/ingredientes/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"ingredientes",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ingredientes - Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "64e3acf0-6113-4d5d-85e8-c6d8c12ddbdc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Nombre\": \"gageea\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/ingredientes/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"ingredientes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ingredientes - Update",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "64e3acf0-6113-4d5d-85e8-c6d8c12ddbdc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Id\": 17,\r\n    \"Nombre\": \" rojo\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/ingredientes/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"ingredientes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ingredientes - DeleteById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "64e3acf0-6113-4d5d-85e8-c6d8c12ddbdc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/ingredientes/17",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"ingredientes",
+								"17"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "IngredientesPorPizzas",
+			"item": [
+				{
+					"name": "IngredientesPorPizzas - GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/ingredientesXPizza/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"ingredientesXPizza",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "IngredientesPorPizzas - GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/ingredientesXpizzas/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"ingredientesXpizzas",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "IngredientesPorPizzas - Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "64e3acf0-6113-4d5d-85e8-c6d8c12ddbdc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Nombre\": \"Morron\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/ingredientesXpizzas/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"ingredientesXpizzas",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Unidades",
+			"item": [
+				{
+					"name": "Unidades - GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/unidades",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"unidades"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unidades - GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/unidades/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"unidades",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -33,6 +33,38 @@ const BASE_URL_PIZZAS = 'http://localhost:3000/api/pizzas/';
         console.log(error);
       });
   }
+
+  function CargarIngredientes() {
+    console.log("Estoy en CargarIngredientes");
+    axios
+      .get("http://localhost:3000/api/ingredientes/")
+      
+      .then((result) => {
+        const ingrediente = result.data;
+        var index= 0;
+  
+        pizza.map((Ingrediente, index) => {
+          const {Nombre} = Ingrediente;
+  
+          document.querySelector("#listado").innerHTML += `
+          <div class="col-4 pt-5">
+          <div class="card" style="width:18rem;">
+          <div class="card-body">
+          <div class="alert alert-success" role="alert">
+          <center><h5 class="card-title nombre">${Nombre}</h5></center>
+          <p class="card-text"></p>
+          </div>
+          </div>
+          </div>
+          </div>
+         `;
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   function getById(){
     let id = document.getElementById('txtId').value;
     //let url =(BASE_URL_PIZZAS + id);
@@ -53,6 +85,20 @@ const BASE_URL_PIZZAS = 'http://localhost:3000/api/pizzas/';
       });
   }
 
+  function getByIdIngrediente(){
+    let id = document.getElementById('IdIngrediente').value;
+
+    console.log('getByIdIngrediente: ', id);
+    axios
+      .get("http://localhost:3000/api/ingredientes/" + id)
+      .then((result) => {
+        displayUnIngrediente(result.data, false);
+      })
+      .catch(error => {
+        displayUnIngrediente({}, true);
+      });
+  }
+
   function displayUnaPizza(unaPizza, huboError){
     let estilo = 'table-dark';
     if (huboError){
@@ -70,6 +116,22 @@ const BASE_URL_PIZZAS = 'http://localhost:3000/api/pizzas/';
       table += "</table>";
     document.getElementById("listado").innerHTML = table;
   }
+
+  function displayUnIngrediente(unIngrediente, huboError){
+    let estilo = 'table-dark';
+    if (huboError){
+      estilo = 'table-danger';
+    }
+    let table = '<table class="table table-striped table-hover">';
+    table += `<thead class="${estilo}"><tr><th class="col-1 text-center">Id</th><th class="col-3">Nombre</th><th class="col-5">Descripcion</th><th class="col-2 text-center">Importe</th><th class="col-1 text-center">Libre Gluten</th></tr></thead>`;
+      table += `<tr>`;
+      table += `<td scope="col" class="text-center">${unIngrediente.Id}</td>`;
+      table += `<td scope="col">${unIngrediente.Nombre}</td>`;
+      table += `</tr>`;
+      table += "</table>";
+    document.getElementById("listado").innerHTML = table;
+  }
+
 
   function Insert(){
   

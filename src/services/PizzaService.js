@@ -24,11 +24,11 @@ export default class PizzaService{
     let returnEntity=null;
     console.log('Estoy en: PizzaSErvice.GetById(id)');
     try{
-        //me conecto con la base
+       
         let pool= await sql.connect(config);
-        //hago un request
+        
         let result = await pool.request()
-        //por parametros (input)
+       
                             .input('pId', sql.Int, id)
                             .query('SELECT * FROM Pizzas WHERE id=@pId')
         returnEntity=result.recordsets[0][0];
@@ -71,7 +71,7 @@ export default class PizzaService{
                                     .input('pImporte', sql.Float,cuerpo.Importe)
                                     .input('pDescripcion', sql.VarChar,cuerpo.Descripcion)
                                     .query("UPDATE Pizzas SET Nombre=@pNombre,LibreGluten=@pLibreGluten,Importe=@pImporte,Descripcion=@pDescripcion WHERE Id=@pId");
-                                    returnEntity=result.rowsAffected;
+              returnEntity=result.rowsAffected;
             } 
             catch(error) {
                 console.log(error);

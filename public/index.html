@@ -74,6 +74,41 @@
   <label class="form-text" for="InputText">Ingrese el id de la pizza a borrar</label>
     <center><button type="button" class="btn btn-success boton" onclick="Delete()"> Eliminar pizza</button> </center>
 
+    
+
+
+
+    
+
+    <center><button type="button" class="btn btn-success boton" onclick="CargarIngredientes()">Cargar Pizzas</button> </center>
+
+    <div class="form-outline">
+      <input type="number" id="IdIngrediente" class="form-control" />
+      <label class="form-label" for="typeNumber">Ingrese Id del ingrediente</label>
+      <center><button type="button" class="btn btn-success boton" onclick="getByIdIngrediente()"> Buscar por Id</button> </center>
+   </div>
+
+
+
+
+
+   <form>
+    <div class="form-group">
+      <input type="text" class="form-control" id="InputNombre" placeholder="Nombre">
+      <label class="form-text" for="InputText">Ingrese el nombre del ingrediente</label>
+    </div>
+  
+    <center><button type="button" class="btn btn-success boton" onclick="Insert()"> Agregar ingrediente</button> </center>
+  </form>
+
+
+
+
+
+
+
+
+
       <div class="container m-auto">
       <div id="listado" class="row"></div>
       </div>

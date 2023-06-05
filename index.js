@@ -3,6 +3,9 @@ import config from './dbconfig.js';
 import express from "express";
 import cors from "cors";
 import PizzaRouter from './src/controllers/pizzaController.js'
+import IngredientesRouter from './src/controllers/IngredientesController.js'
+import IngredientesXPizzaRouter from './src/controllers/IngredientesXPizzaController.js'
+
 const app = express();
 const port = 3000;
 
@@ -32,6 +35,8 @@ app.use(express.static('public'));
 // app.use(horaMiddleware);
 
 app.use("/api/pizzas", PizzaRouter);
+app.use("/api/ingredientes", IngredientesRouter);
+app.use("/api/ingredientesXPizza", IngredientesXPizzaRouter);
 
 app.listen(port, () => {
     console.log("Escuchando en el " + port );
