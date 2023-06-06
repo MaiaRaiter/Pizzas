@@ -3,23 +3,60 @@ import sql from 'mssql';
 
 export default class IngredientesXPizzaService{
 
-        getById=async(id)=>{
+        getByIdPizza = async (idPizza) => {
             let returnEntity=null;
+
             console.log('Estoy en: IngredientesXPizzaService.GetById(id)');
+
             try{
-               
+                
                 let pool= await sql.connect(config);
                 
                 let result = await pool.request()
-                                    .input('pId', sql.Int, id)
-                                    .query('SELECT  IngredientesXPizzas.Id AS IdRelacion, Ingredientes.Id AS IdIngrediente, Ingredientes.Nombre AS Nombre, IngredientesXPizzas.Cantidad AS Cantidad, Unidades.Id AS IdUnidad, Unidades.Nombre AS Unidad  FROM IngredientesXPizzas INNER JOIN Ingredientes ON IngredientesXPizzas.IdIngrediente = Ingredientes.Id INNER JOIN Pizzas ON IngredientesXPizzas.IdPizza = Pizzas.Id INNER JOIN Unidades ON IngredientesXPizzas.IdUnidad = Unidades.Id WHERE IdPizza = @pId')
-                returnEntity=result.recordsets[0][0];
+                                    .input('pIdPizza', sql.Int, idPizza)
+                                    .query(`SELECT 
+                                            Ingredientes.Id, 
+                                            Ingredientes.Nombre 
+                                            FROM IngredientesXPizzas 
+                                            INNER JOIN Ingredientes ON IngredientesXPizzas.IdIngrediente = Ingredientes.Id
+                                            Where IdPizza = @pIdPizza`);
+                
+                returnEntity=result.recordset;
+            } 
+            catch(error) {
+
+                console.log(error);
+            }
+
+           return returnEntity;
+        }
+
+
+        getAll = async() => {
+            let returnEntity = null;
+            
+            console.log('Estoy en: IngredientesXPizzaService.GetAll');
+            try{
+                
+                let pool= await sql.connect(config);
+               
+                let result = await pool.request().query(`SELECT 
+                                                            Pizzas.Id, 
+                                                            Pizzas.Nombre,
+                                                            Ingredientes.Id, 
+                                                            Ingredientes.Nombre 
+                                                            FROM IngredientesXPizzas 
+                                                            INNER JOIN Pizzas ON IngredientesXPizzas.IdPizza = Pizzas.Id
+                                                            INNER JOIN Ingredientes ON IngredientesXPizzas.IdIngrediente = Ingredientes.Id
+                                                            `)
+    
+                returnEntity=result.recordsets[0];
             } 
             catch(error) {
                 console.log(error);
             }
            return returnEntity;
-        }
+            }
 
     insert = async (cuerpo) => {
         let returnEntity=null;

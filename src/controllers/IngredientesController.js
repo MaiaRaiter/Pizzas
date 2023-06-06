@@ -21,7 +21,7 @@ IngredientesRouter.get('/:id', async (req, res) => {
   const ingredientes = await ingredientesService.getById(req.params.id);
 
   console.log('ingredientes', ingredientes);
-
+  
   if (ingredientes!=null){
 
     console.log('1');
