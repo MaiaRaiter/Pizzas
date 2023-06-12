@@ -24,13 +24,11 @@ export default class PizzaService{
 
                 const pizza = returnEntity[i];
 
-                returnEntity.Ingredientes = await iXpS.getByIdPizza(pizza.Id);
+                returnEntity[i].Ingredientes = await iXpS.getByIdPizza(pizza.Id);
+
+                console.log(returnEntity[i].Ingredientes);
 
             }
-
-            //returnEntity = result.recordsets[0][0];
-
-            //returnEntity.Ingredientes = await iXpS.getByIdPizza(returnEntity[0].Id);
 
         } 
         catch(error) {
@@ -67,12 +65,16 @@ export default class PizzaService{
         try{
             let pool= await sql.connect(config);
             let result = await pool.request()
+                                .input('pId',sql.VarChar, cuerpo.Id)
                                 .input('pNombre',sql.VarChar, cuerpo.Nombre)
                                 .input('pLibreGluten',sql.Bit, cuerpo.LibreGluten)
                                 .input('pImporte', sql.Float,cuerpo.Importe)
                                 .input('pDescripcion', sql.VarChar,cuerpo.Descripcion)
                                 .query("INSERT INTO Pizzas(Nombre,LibreGluten,Importe,Descripcion) VALUES (@pNombre,@pLibreGluten,@pImporte,@pDescripcion)");
+
             returnEntity=result.rowsAffected;
+
+            returnEntity.rowsAffectedIngedientes = await iXpS.insertIngredienteXPizza(cuerpo.Id, cuerpo);
         } 
         catch(error) {
             console.log(error);

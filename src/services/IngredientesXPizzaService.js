@@ -31,33 +31,9 @@ export default class IngredientesXPizzaService{
            return returnEntity;
         }
 
-        getAll = async() => {
-            let returnEntity = null;
-            
-            console.log('Estoy en: IngredientesXPizzaService.GetAll');
-            try{
-                
-                let pool= await sql.connect(config);
-               
-                let result = await pool.request().query(`SELECT 
-                Pizzas.Id, 
-                Ingredientes.Id, 
-                Ingredientes.Nombre 
-                FROM IngredientesXPizzas 
-                INNER JOIN Ingredientes ON IngredientesXPizzas.IdIngrediente = Ingredientes.Id
-                INNER JOIN Pizzas ON IngredientesXPizzas.IdPizza = Pizzas.Id
-                `)
-                returnEntity=result.recordsets[0];
-            } 
-            catch(error) {
-                console.log(error);
-            }
-           return returnEntity;
-            }
-
-    insert = async (cuerpo) => {
+        insertIngredienteXPizza = async (Id, cuerpo) => {
         let returnEntity=null;
-        console.log('Estoy en: IngredientesService.insert');
+        console.log('Estoy en: IngredientesXPizzaService.insert');
         try{
             let pool= await sql.connect(config);
             let result = await pool.request()
