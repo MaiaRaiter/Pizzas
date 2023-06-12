@@ -17,14 +17,26 @@ export default class PizzaService{
             let pool= await sql.connect(config);
            
             let result = await pool.request().query("SELECT * FROM Pizzas")
-            
-            returnEntity=result.recordsets[0];
-            returnEntity.Ingredientes = await iXpS.getAll(result.recordsets[0]);
+
+            returnEntity = result.recordsets[0];
+
+            for (let i = 0; i < returnEntity.length; i++) {
+
+                const pizza = returnEntity[i];
+
+                returnEntity.Ingredientes = await iXpS.getByIdPizza(pizza.Id);
+
+            }
+
+            //returnEntity = result.recordsets[0][0];
+
+            //returnEntity.Ingredientes = await iXpS.getByIdPizza(returnEntity[0].Id);
+
         } 
         catch(error) {
             console.log(error);
         }
-       return returnEntity;
+        return returnEntity;
         }
     
     getById=async(id)=>{

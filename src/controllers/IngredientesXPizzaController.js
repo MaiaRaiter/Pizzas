@@ -1,17 +1,21 @@
 import {Router} from 'express';
 import IngredientesXPizzaService from '../services/IngredientesXPizzaService.js';
 
-
-//NO SE USA
-
-
-
 const IngredientesXPizzaRouter = Router();
 const ingredientesXPizzaService = new IngredientesXPizzaService();
 
+IngredientesXPizzaRouter.get('/', async (req, res) => {
+  console.log('Estoy en: ingredientesXPizzaController get /');
+  
+  const pizzas = await ingredientesXPizzaService.getAll();
+
+  return res.status(200).json(pizzas);
+});
+
+
 IngredientesXPizzaRouter.get('/:id', async (req, res) => {
 
-  console.log('Estoy en: IngredientesXPizzaController get /:id', req.params.id);
+  console.log('Estoy en: ingredientesXPizzaController get /:id', req.params.id);
 
   let respuesta;
   

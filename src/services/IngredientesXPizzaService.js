@@ -31,7 +31,6 @@ export default class IngredientesXPizzaService{
            return returnEntity;
         }
 
-
         getAll = async() => {
             let returnEntity = null;
             
@@ -41,15 +40,13 @@ export default class IngredientesXPizzaService{
                 let pool= await sql.connect(config);
                
                 let result = await pool.request().query(`SELECT 
-                                                            Pizzas.Id, 
-                                                            Pizzas.Nombre,
-                                                            Ingredientes.Id, 
-                                                            Ingredientes.Nombre 
-                                                            FROM IngredientesXPizzas 
-                                                            INNER JOIN Pizzas ON IngredientesXPizzas.IdPizza = Pizzas.Id
-                                                            INNER JOIN Ingredientes ON IngredientesXPizzas.IdIngrediente = Ingredientes.Id
-                                                            `)
-    
+                Pizzas.Id, 
+                Ingredientes.Id, 
+                Ingredientes.Nombre 
+                FROM IngredientesXPizzas 
+                INNER JOIN Ingredientes ON IngredientesXPizzas.IdIngrediente = Ingredientes.Id
+                INNER JOIN Pizzas ON IngredientesXPizzas.IdPizza = Pizzas.Id
+                `)
                 returnEntity=result.recordsets[0];
             } 
             catch(error) {
