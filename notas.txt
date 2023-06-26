@@ -1,0 +1,15 @@
+middle were wntre cuLQUIER REQ Y RES
+
+
+hago UsuarioServise y un controller
+tienen un lo gin en el controller se pasa a *******
+
+service: thin.funcion
+verifico si exist el ususario en bd
+
+app.use(AutenticationMiddleware.requiereAutentication): verififca que se haya pusto el token
+token=req.get('token')
+si queiro que paso pongo next()
+
+*Me tiene que devolver objetos 
+*Devolver con unidad

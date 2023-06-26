@@ -1,7 +1,7 @@
-USE [DAI-Pizzas]
+USE [master]
 GO
 --
--- Primero hay que creal la base de datos 'DAI-Pizzas'
+-- Primero hay que crear la base de datos 'DAI-Pizzas'
 --
 
 IF NOT EXISTS (SELECT * FROM sys.server_principals WHERE [name] = N'Pizzas')
