@@ -1,8 +1,32 @@
 import logConfiguration from "./log-configuration.js";
-import winston from "winston";
+import fs from 'fs';
 
+class logHelper{
+    getFileName = () =>
+    {
+        let returnValue;
+        returnValue=`${logConfiguration.logFolder}errores.txt`;
+        return returnValue;
+    }
 
-const logger = winston.createLogger(logConfiguration);
+    logError = async (text,error)=> {
+        let linea ;
+        let errorFileName =this.getFileName();
+        let fechaHora= new Date().toISOString();
 
-module.exports = logger;
-//logger.error("Hello, Winston logger, the first error!");
+        linea=fechaHora + ' '+ text+ "error" + error.message + '\n'
+
+        console.log(errorFileName,linea);
+
+        fs.appendFile(errorFileName,linea , (err) => {
+            if (err) {
+              console.log(err)  ;
+            }
+
+        });
+    }
+}
+
+export default new logHelper;
+
+ 

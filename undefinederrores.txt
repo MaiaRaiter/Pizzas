@@ -1,0 +1,14 @@
+2023-07-03T12:55:10.141Z Usuarios -> getByUserNamePassworderrorCannot read properties of undefined (reading 'recordset')
+2023-07-03T12:55:39.367Z Usuarios -> getByUserNamePassworderrorCannot read properties of undefined (reading 'recordset')
+2023-07-03T12:55:49.542Z Usuarios -> getByUserNamePassworderrorCannot read properties of undefined (reading 'recordset')
+2023-07-03T12:56:31.306Z Usuarios -> getByUserNamePassworderrorCannot read properties of undefined (reading 'recordset')
+2023-07-03T12:56:58.081Z Usuarios -> getByUserNamePassworderrorCannot read properties of undefined (reading 'recordset')
+2023-07-03T13:12:51.727Z UsuariosService->updateTokenByIderrorValidation failed for parameter 'pExpirationDate'. Invalid string.
+2023-07-03T13:13:39.098Z UsuariosService->updateTokenByIderrorValidation failed for parameter 'pExpirationDate'. Invalid string.
+2023-07-03T13:14:32.490Z UsuariosService->updateTokenByIderrorValidation failed for parameter 'pExpirationDate'. Invalid string.
+2023-07-03T13:17:56.675Z UsuariosService->updateTokenByIderrorValidation failed for parameter 'pExpirationDate'. Invalid string.
+2023-07-03T13:18:44.911Z UsuariosService->updateTokenByIderrorValidation failed for parameter 'pExpirationDate'. Invalid string.
+2023-07-03T13:19:00.708Z UsuariosService->updateTokenByIderrorValidation failed for parameter 'pExpirationDate'. Invalid string.
+2023-07-03T13:19:47.105Z UsuariosService->updateTokenByIderrorValidation failed for parameter 'pExpirationDate'. Invalid string.
+2023-07-03T13:20:17.545Z UsuariosService->updateTokenByIderrorValidation failed for parameter 'pExpirationDate'. Invalid string.
+2023-07-03T13:40:47.055Z UsuariosService->updateTokenByIderrorMust declare the scalar variable "@pTokenExpirationDate".
