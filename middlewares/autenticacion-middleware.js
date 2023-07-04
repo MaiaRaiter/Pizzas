@@ -8,11 +8,11 @@ class AutenticationMiddleWare {
         let TokenExpirationDate = null;
         
 
-        if (req.path.toLowerCase().startWith("/front/")) return next();
-        if (req.path.toLowerCase().startWith("/api/usuarios/login")) return next();
-        if (req.path.toLowerCase().startWith("/api/usuarios/ingredientesxpizzas")) return next();
-        if (req.path.toLowerCase().startWith("/api/ingredientes")) return next();
-        if (req.path.toLowerCase().startWith("/api/unidades")) return next();
+        if (req.path.toLowerCase().startsWith("/front/")) return next();
+        if (req.path.toLowerCase().startsWith("/api/usuarios/login")) return next();
+        if (req.path.toLowerCase().startsWith("/api/usuarios/ingredientesxpizzas")) return next();
+        if (req.path.toLowerCase().startsWith("/api/ingredientes")) return next();
+        if (req.path.toLowerCase().startsWith("/api/unidades")) return next();
 
         //OBTENGO EL TOKEN DEL HEADER
 
@@ -29,12 +29,14 @@ class AutenticationMiddleWare {
 
                 //verifico que no haya expirado la fecha
                 
-
+                console.log(currentDate);
+                console.log(TokenExpirationDate);
                 if (currentDate < TokenExpirationDate){
-                    console.log(currentDate);
+                    console.log("OK");
                     next(); 
 
                 } else {
+                    console.log("EXPIROOO");
                     res.status(401).send('401 Unauthorized, el token expiró.');
                 }
 

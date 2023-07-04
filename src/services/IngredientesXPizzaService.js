@@ -3,6 +3,28 @@ import sql from 'mssql';
 
 export default class IngredientesXPizzaService{
 
+    getAll = async() => {
+
+        let returnEntity = null;
+        
+        console.log('Estoy en: PizzaSErvice.GetAll');
+       
+
+        try{
+            
+            let pool= await sql.connect(config);
+           
+            let result = await pool.request().query("SELECT * FROM IngredientesXPizzas")
+
+            returnEntity = result.recordset;
+
+        } 
+        catch(error) {
+            console.log(error);
+        }
+        return returnEntity;
+    }
+
         getByIdPizza = async (idPizza) => {
             let returnEntity=null;
 

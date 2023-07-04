@@ -101,7 +101,7 @@ export default class UsuariosService{
             let result = await pool.request()
                                             .input ('pToken', sql.VarChar, token)
                                             .input ('pId', sql.Int, id)
-                                            .input ('pExpirationDate', sql.VarChar, expirationDate.toISOString())
+                                            .input ('pTokenExpirationDate', sql.VarChar, expirationDate.toISOString())
                                             .query (`UPDATE ${NOMBRE_TABLA} SET
                                                     Token = @pToken,
                                                     TokenExpirationDate = @pTokenExpirationDate

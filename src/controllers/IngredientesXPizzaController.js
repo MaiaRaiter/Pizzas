@@ -7,9 +7,9 @@ const ingredientesXPizzaService = new IngredientesXPizzaService();
 IngredientesXPizzaRouter.get('/', async (req, res) => {
   console.log('Estoy en: ingredientesXPizzaController get /');
   
-  const pizzas = await ingredientesXPizzaService.getAll();
+  const ingredientesXPizza = await ingredientesXPizzaService.getAll();
 
-  return res.status(200).json(pizzas);
+  return res.status(200).json(ingredientesXPizza);
 });
 
 

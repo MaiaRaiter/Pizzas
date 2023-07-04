@@ -7,20 +7,30 @@ import PizzaService from '../services/PizzaService.js';
 const PizzaRouter = Router();
 const pizzaService = new PizzaService();
 
-PizzaRouter.get('/', async (req, res) => {
+PizzaRouter.get('', async (req, res) => {
+  let respuesta;
+  let incliurIngredientes = (typeof req.query.incluirIngredientes != 'undefined' && req.query.incluirIngredientes.toLowerCase() === 'true')
+  let incluirUnidades = (typeof req.query.incluirUnidades != 'undefined' && req.query.incluirUnidades.toLowerCase() === 'true')
+  console.log('incliurIngredientes', incliurIngredientes);
   console.log('Estoy en: pizzaController get /');
   
-  const pizzas = await pizzaService.getAll();
+  const pizzas = await pizzaService.getAll(incliurIngredientes);
 
-  //return res.status(StatusCodes.OK).json(pizzas);
-  return res.status(200).json(pizzas);
+  if(pizzas != null) {
+    respuesta = res.status(200).json(pizzas);
+  } else {
+    respuesta = res.status(404).json("No se encontro la Pizza.");
+  }
+  
 });
 
 PizzaRouter.get('/:id', async (req, res) => {
+  let incliurIngredientes = (typeof req.query.incluirIngredientes != 'undefined' && req.query.incluirIngredientes.toLowerCase() === 'true')
+
   console.log('Estoy en: pizzaController get /:id', req.params.id);
   let respuesta;
   
-  const pizza = await pizzaService.getById(req.params.id);
+  const pizza = await pizzaService.getById(req.params.id,incliurIngredientes);
   console.log('pizza', pizza);
   if (pizza!=null){
     console.log('1');

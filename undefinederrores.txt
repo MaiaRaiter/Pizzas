@@ -12,3 +12,4 @@
 2023-07-03T13:19:47.105Z UsuariosService->updateTokenByIderrorValidation failed for parameter 'pExpirationDate'. Invalid string.
 2023-07-03T13:20:17.545Z UsuariosService->updateTokenByIderrorValidation failed for parameter 'pExpirationDate'. Invalid string.
 2023-07-03T13:40:47.055Z UsuariosService->updateTokenByIderrorMust declare the scalar variable "@pTokenExpirationDate".
+2023-07-04T10:57:17.174Z UsuariosService->updateTokenByIderrorMust declare the scalar variable "@pTokenExpirationDate".

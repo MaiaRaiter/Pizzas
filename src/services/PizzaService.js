@@ -6,11 +6,12 @@ const iXpS =  new  IngredientesXPizzaService();
 
 export default class PizzaService{
 
-    getAll = async() => {
+    getAll = async(incliurIngredientes) => {
 
         let returnEntity = null;
-
+        incliurIngredientes = incliurIngredientes || false;
         console.log('Estoy en: PizzaSErvice.GetAll');
+        console.log('incliurIngredientes', incliurIngredientes);
 
         try{
             
@@ -18,16 +19,23 @@ export default class PizzaService{
            
             let result = await pool.request().query("SELECT * FROM Pizzas")
 
-            returnEntity = result.recordsets[0];
+            returnEntity = result.recordset;
 
-            for (let i = 0; i < returnEntity.length; i++) {
+            if (incliurIngredientes){
 
-                const pizza = returnEntity[i];
+                if ((returnEntity != null) && (returnEntity.length > 0)) {
 
-                returnEntity[i].Ingredientes = await iXpS.getByIdPizza(pizza.Id);
+                    for (let i = 0; i < returnEntity.length; i++) {
 
-                console.log(returnEntity[i].Ingredientes);
+                        const pizza = returnEntity[i];
+        
+                        returnEntity[i].Ingredientes = await iXpS.getByIdPizza(pizza.Id);
+        
+                        console.log(returnEntity[i].Ingredientes);
+        
+                    }
 
+                }
             }
 
         } 
@@ -35,28 +43,39 @@ export default class PizzaService{
             console.log(error);
         }
         return returnEntity;
-        }
-    
-    getById=async(id)=>{
-    let returnEntity=null;
-    console.log('Estoy en: PizzaSErvice.GetById(id)');
-    try{
-       
-        let pool= await sql.connect(config);
-        
-        let result = await pool.request()
-       
-                            .input('pId', sql.Int, id)
-                            .query('SELECT * FROM Pizzas WHERE id=@pId')
-
-        returnEntity=result.recordsets[0][0];
-        returnEntity.Ingredientes = await iXpS.getByIdPizza(id);
-        
-    } 
-    catch(error) {
-        console.log(error);
     }
-   return returnEntity;
+    
+    getById=async(id, incliurIngredientes)=>{
+
+        let returnEntity=null;
+
+        incliurIngredientes = incliurIngredientes || false;
+
+        console.log('Estoy en: PizzaSErvice.GetById(id)');
+
+        try{
+        
+            let pool= await sql.connect(config);
+            
+            let result = await pool.request()
+        
+                                .input('pId', sql.Int, id)
+                                .query('SELECT * FROM Pizzas WHERE id=@pId')
+
+            returnEntity=result.recordset[0];
+
+            if (incliurIngredientes){
+
+                if (returnEntity != null) {
+                    returnEntity.Ingredientes = await iXpS.getByIdPizza(id);
+                }
+            }
+            
+        } 
+        catch(error) {
+            console.log(error);
+        }
+        return returnEntity;
     }
 
     insert = async (cuerpo) => {

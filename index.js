@@ -53,13 +53,14 @@ const CreatedByAlumno = function (req, res, next) {
     next();
 }        
 
-app.use(cors())
+app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 //app.use(horaMiddleware);
 //app.use(checkApiKey);
 //app.use(CreatedByAlumno);
 
+app.use(autenticationMiddleWare.requiereAutenticacion);
 app.use("/api/pizzas", PizzaRouter);
 app.use("/api/ingredientes", IngredientesRouter);
 app.use("/api/ingredientesXPizza", IngredientesXPizzaRouter);
