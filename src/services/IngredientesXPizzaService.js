@@ -53,14 +53,17 @@ export default class IngredientesXPizzaService{
            return returnEntity;
         }
 
-        insertIngredienteXPizza = async (Id, cuerpo) => {
+        insertIngredienteXPizza = async (cuerpo) => {
         let returnEntity=null;
-        console.log('Estoy en: IngredientesXPizzaService.insert');
+        console.log('Estoy en: IngredientesXPizzaService.insertIngredienteXPizza');
         try{
             let pool= await sql.connect(config);
             let result = await pool.request()
-                                .input('pNombre',sql.VarChar, cuerpo.Nombre)
-                                .query("INSERT INTO Ingredientes(Nombre) VALUES (@pNombre)");
+                                .input('pIdPizza',sql.Int, cuerpo.IdPizza)
+                                .input('pIdIngrediente',sql.Int, cuerpo.IdIngrediente)
+                                .input('pCantidad',sql.Int, cuerpo.Cantidad)
+                                .input('pIdUnidad',sql.Int, cuerpo.IdUnidad)
+                                .query("INSERT INTO IngredientesXPizzas(IdPizza,IdIngrediente,Cantidad,IdUnidad) VALUES (@pIdPizza,@pIdIngrediente,@pCantidad,@pIdUnidad)");
             returnEntity=result.rowsAffected;
         } 
         catch(error) {
@@ -69,42 +72,25 @@ export default class IngredientesXPizzaService{
         return returnEntity;
     }
 
+    deleteByIdIngrediente = async (idIngrediente) => {
+        
 
-    update=async(cuerpo)=>{
-            let returnEntity=null;
-            console.log('Estoy en: IngredientesService.update');
-            try{
-                let pool= await sql.connect(config);
-                let result = await pool.request()
-                                    .input('pId', sql.Int, cuerpo.Id)
-                                    .input('pNombre',sql.VarChar, cuerpo.Nombre)
-                                    .query("UPDATE Ingredientes SET Nombre=@pNombre WHERE Id=@pId");
-              returnEntity=result.rowsAffected;
-            } 
-            catch(error) {
-                console.log(error);
-            }
-           return returnEntity;
-            }
+        let rowsAffected=0;
 
-    deleteById = async (id) => {
+        console.log('Estoy en: IngredientesXPizzaService.deleteById(id)');
 
-    let rowsAffected=0;
+        try {
+            let pool = await sql.connect(config)
+            let result= await pool.request()
+                            .input('pIdIngrediente', sql.Int , idIngrediente)
+                            .query('DELETE FROM IngredientesXPizzas WHERE IdIngrediente=@pIdIngrediente');
 
-    console.log('Estoy en: IngredientesService.deleteById(id)');
-
-    try {
-        let pool = await sql.connect(config)
-        let result= await pool.request()
-                          .input('pId', sql.Int , id)
-                          .query('DELETE FROM Ingredientes WHERE Id=@pId');
-
-      rowsAffected=result.rowsAffected; 
-                         
-    } catch (error) {
-        console.log(error)
-    }
-    return rowsAffected;
+            rowsAffected=result.rowsAffected; 
+                            
+        } catch (error) {
+            console.log(error)
+        }
+        return rowsAffected;
     }
 
 }

@@ -8,6 +8,7 @@ import IngredientesXPizzaRouter from './src/controllers/IngredientesXPizzaContro
 import UsuarioRouter from './src/controllers/UsuariosController.js';
 import pkg from 'express/lib/response.js';
 import autenticationMiddleWare from './middlewares/autenticacion-middleware.js';
+import UnidadesRouter from './src/controllers/UnidadesController.js';
 const { header } = pkg;
 
 
@@ -65,6 +66,7 @@ app.use("/api/pizzas", PizzaRouter);
 app.use("/api/ingredientes", IngredientesRouter);
 app.use("/api/ingredientesXPizza", IngredientesXPizzaRouter);
 app.use("/api/usuarios", UsuarioRouter);
+app.use("/api/unidades", UnidadesRouter);
 
 app.listen(port, () => {
     console.log("Escuchando en el " + port );

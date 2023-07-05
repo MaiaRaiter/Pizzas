@@ -19,7 +19,7 @@ IngredientesXPizzaRouter.get('/:id', async (req, res) => {
 
   let respuesta;
   
-  const ingredientesXPizza = await ingredientesXPizzaService.getById(req.params.id);
+  const ingredientesXPizza = await ingredientesXPizzaService.getByIdPizza(req.params.id);
 
   console.log('ingredientesXPizza', ingredientesXPizza);
 
@@ -39,35 +39,22 @@ IngredientesXPizzaRouter.get('/:id', async (req, res) => {
   return respuesta;
 });
 
-/*
-IngredientesRouter.post('', async (req, res) => {
-  //estoy creando uno nuevo por body-- en postman va en body
+
+IngredientesXPizzaRouter.post('', async (req, res) => {
   let cuerpo = req.body;
-  console.log('Estoy en: IngredientesController post /', cuerpo);
+  console.log('Estoy en: ingredientesXPizzaController post /', cuerpo);
 
-  const ingredientes = await ingredientesService.insert(cuerpo);
+  const ingredientesXPizza = await ingredientesXPizzaService.insertIngredienteXPizza(cuerpo);
 
-  return res.status(201).json(ingredientes);
+  return res.status(201).json(ingredientesXPizza);
 });
 
-IngredientesRouter.put('', async (req, res) => {
-  let cuerpo = req.body;
+IngredientesXPizzaRouter.delete('/:idIngrediente', async (req, res) => {
+  console.log('Estoy en: ingredientesXPizzaController delete /:idIngrediente', req.params.idIngrediente);
 
-  console.log('Estoy en: IngredientesController put /:id');
+  const ingredientesXPizza = await ingredientesXPizzaService.deleteByIdIngrediente(req.params.idIngrediente);
 
-  const ingredientes = await ingredientesService.update(cuerpo);
-
-  return res.status(200).json(ingredientes);
+  return res.status(200).json(ingredientesXPizza);
 });
-
-IngredientesRouter.delete('/:id', async (req, res) => {
-  console.log('Estoy en: IngredientesController delete /:id', req.params.id);
-
-  const ingredientes = await ingredientesService.deleteById(req.params.id);
-
-  return res.status(200).json(ingredientes);
-});
-*/
-
 
 export default IngredientesXPizzaRouter;

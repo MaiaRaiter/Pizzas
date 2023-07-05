@@ -1,17 +1,21 @@
 import config from '../../dbconfig.js';
 import sql from 'mssql';
 import IngredientesXPizzaService from './IngredientesXPizzaService.js'
+import UnidadesService from './UnidadesService.js';
 
 const iXpS =  new  IngredientesXPizzaService();
+const uXpS =  new  UnidadesService();
 
 export default class PizzaService{
 
-    getAll = async(incliurIngredientes) => {
+    getAll = async(incliurIngredientes,incluirUnidades) => {
 
         let returnEntity = null;
         incliurIngredientes = incliurIngredientes || false;
+        incluirUnidades = incluirUnidades || false;
+
         console.log('Estoy en: PizzaSErvice.GetAll');
-        console.log('incliurIngredientes', incliurIngredientes);
+        console.log('incliurIngredientes', incliurIngredientes, 'incliurUnidades', incluirUnidades);
 
         try{
             
@@ -21,7 +25,7 @@ export default class PizzaService{
 
             returnEntity = result.recordset;
 
-            if (incliurIngredientes){
+            if (incliurIngredientes && incluirUnidades){
 
                 if ((returnEntity != null) && (returnEntity.length > 0)) {
 
@@ -30,8 +34,10 @@ export default class PizzaService{
                         const pizza = returnEntity[i];
         
                         returnEntity[i].Ingredientes = await iXpS.getByIdPizza(pizza.Id);
+
+                        returnEntity[i].Unidades = await uXpS.getById(pizza.Id);
         
-                        console.log(returnEntity[i].Ingredientes);
+                        console.log(returnEntity[i].Ingredientes, returnEntity[i].Unidades);
         
                     }
 
@@ -45,11 +51,13 @@ export default class PizzaService{
         return returnEntity;
     }
     
-    getById=async(id, incliurIngredientes)=>{
+    getById=async(id, incliurIngredientes, incliurUnidades)=>{
 
         let returnEntity=null;
 
         incliurIngredientes = incliurIngredientes || false;
+        incliurUnidades = incliurUnidades || false;
+    
 
         console.log('Estoy en: PizzaSErvice.GetById(id)');
 
@@ -64,10 +72,11 @@ export default class PizzaService{
 
             returnEntity=result.recordset[0];
 
-            if (incliurIngredientes){
+            if (incliurIngredientes && incliurUnidades){
 
                 if (returnEntity != null) {
                     returnEntity.Ingredientes = await iXpS.getByIdPizza(id);
+                    returnEntity.Unidades = await uXpS.getById(id);
                 }
             }
             
